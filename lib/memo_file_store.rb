@@ -1,25 +1,23 @@
-require_relative "../models/memo.rb"
-
 class MemoFileStore
 
   def findAll
-
+    "call findAll"
   end
 
-  def find(name_id)
-
+  def find(memo_id)
+    "call find: #{memo_id}"
   end
 
   def delete(memo_id)
-
+    "call delete: #{memo_id}"
   end
 
-  def update(memo)
-
+  def update(content)
+    "call findAll: #{content}"
   end
 
-  def create(memo)
-
+  def create(content)
+    "call create: #{content}"
   end
     
 end

@@ -1,12 +1,10 @@
-require_relative "../models/memo.rb"
-
 class MemoDbStore
 
   def findAll
 
   end
 
-  def find(name_id)
+  def find(memo_id)
 
   end
 
@@ -14,11 +12,11 @@ class MemoDbStore
 
   end
 
-  def update(memo)
+  def update(content)
 
   end
 
-  def create(memo)
+  def create(content)
 
   end
     
