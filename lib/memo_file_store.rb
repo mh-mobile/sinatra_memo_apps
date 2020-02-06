@@ -42,9 +42,7 @@ class MemoFileStore
   def update(memo_id, content)
     File.open(file_path, "w") do |file|
       json = load(file_path)
-      memo = json.find do |memo|
-        memo["memo_id"] == memo_id
-      end
+      memo = find(memo_id)
       memo["content"] = content unless memo.nil?
       JSON.dump(json, file)
     end
