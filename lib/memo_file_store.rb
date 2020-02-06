@@ -21,8 +21,8 @@ class MemoFileStore
   end
 
   def find(memo_id)
-    json = load(file_path)
     File.open(file_path, "r") do |file|
+      json = load(file_path)
       json.find do |memo|
         memo["memo_id"] == memo_id
       end
@@ -30,8 +30,8 @@ class MemoFileStore
   end
 
   def delete(memo_id)
-    json = load(file_path)
     File.open(file_path, "w") do |file|
+      json = load(file_path)
       updated_json = json.reject do |memo|
         memo["memo_id"] == memo_id
       end
@@ -40,8 +40,8 @@ class MemoFileStore
   end
 
   def update(memo_id, content)
-    json = load(file_path)
     File.open(file_path, "w") do |file|
+      json = load(file_path)
       memo = json.find do |memo|
         memo["memo_id"] == memo_id
       end
@@ -51,8 +51,8 @@ class MemoFileStore
   end
 
   def create(content)
-    json = load(file_path)
     File.open(file_path, "w") do |file|
+      json = load(file_path)
       memo_id = json.count + 1    
       json << { 
         memo_id: memo_id,
