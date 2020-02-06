@@ -23,7 +23,7 @@ class MemoFileStore
   def find(memo_id)
     json = load(file_path)
     File.open(file_path, "r") do |file|
-      memo = json.find do |memo|
+      json.find do |memo|
         memo["memo_id"] == memo_id
       end
     end
