@@ -16,8 +16,8 @@ module MemoRecordable
     @store.delete(memo_id)
   end
 
-  def update(content)
-    @store.update(content)
+  def update(memo_id, content)
+    @store.update(memo_id, content)
   end
 
   def create(content)

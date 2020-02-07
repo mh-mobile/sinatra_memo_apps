@@ -12,7 +12,7 @@ class MemoDbStore
 
   end
 
-  def update(content)
+  def update(memo_id, content)
 
   end
 
