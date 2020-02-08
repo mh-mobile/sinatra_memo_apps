@@ -5,7 +5,7 @@
 <div class="action-container">
   <a href='<%= "/memos/#{@memo.memo_id}/edit" %>' class="edit-btn">編集</a>
   <form method="post" action='/memos/<%= "#{@memo.memo_id}" %>'>
-    <input type="hidden" name="_method" value=delete">
+    <input type="hidden" name="_method" value="delete">
     <input type="submit" value="削除" class="delete-btn">
   </form>
 </div>
