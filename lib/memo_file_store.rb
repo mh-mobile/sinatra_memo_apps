@@ -60,10 +60,10 @@ class MemoFileStore
 
       currentTime = Time.now.iso8601
       created_item = {
-        memo_id: memo_id,
-        content: content,
-        created_at: currentTime,
-        updated_at: currentTime
+        "memo_id" => memo_id,
+        "content" => content,
+        "created_at" => currentTime,
+        "updated_at" => currentTime,
       }
 
       json << created_item
