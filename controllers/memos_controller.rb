@@ -1,4 +1,5 @@
 require "sinatra/base"
+require "sinatra/reloader"
 require_relative "../models/memo.rb"
 
 class Rack::MethodOverride
@@ -11,6 +12,10 @@ class Rack::MethodOverride
 end
 
 class MemosController < Sinatra::Base
+
+  configure :development do 
+    register Sinatra::Reloader 
+  end
 
   enable :method_override
 
