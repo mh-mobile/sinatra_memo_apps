@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "sinatra/base"
 require "sinatra/reloader"
 require_relative "../models/memo.rb"
@@ -6,15 +8,14 @@ class Rack::MethodOverride
   ALLOWED_METHOD = %w[POST]
   def method_override(env)
     req = Rack::Request.new(env)
-     method = req.params[METHOD_OVERRIDE_PARAM_KEY] || env[HTTP_METHOD_OVERRIDE_HEADER]
-     method.to_s.upcase
+    method = req.params[METHOD_OVERRIDE_PARAM_KEY] || env[HTTP_METHOD_OVERRIDE_HEADER]
+    method.to_s.upcase
   end
 end
 
 class MemosController < Sinatra::Base
-
-  configure :development do 
-    register Sinatra::Reloader 
+  configure :development do
+    register Sinatra::Reloader
   end
 
   enable :method_override
@@ -22,7 +23,7 @@ class MemosController < Sinatra::Base
   set :root, File.join(File.dirname(__FILE__), "..")
   set :views, Proc.new { File.join(root, "views") }
 
-  helpers do 
+  helpers do
     def h(text)
       Rack::Utils.escape_html(text)
     end
@@ -35,13 +36,13 @@ class MemosController < Sinatra::Base
       h(text).split(/\R/)[0]
     end
 
-    def trancate(text, max=50) 
+    def trancate(text, max = 50)
       text = text[0, max] + "..." if text.length > max
       text
     end
   end
 
-  get "/" do 
+  get "/" do
     @memos = Memo.findAll
     @require_new_link = true
     erb :index
@@ -62,7 +63,7 @@ class MemosController < Sinatra::Base
     erb :new
   end
 
-  # show 
+  # show
   get "/:id" do |memo_id|
     @memo = Memo.find(memo_id.to_i)
     if @memo.nil?

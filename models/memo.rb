@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative "memo_dao.rb"
 
 class Memo
@@ -25,11 +27,10 @@ class Memo
     convert(item) unless item.nil?
   end
 
-  def self.convert(memo_item) 
+  def self.convert(memo_item)
     Memo.new.tap do |memo|
       memo.memo_id = memo_item["memo_id"]
       memo.content = memo_item["content"]
     end
   end
-
 end

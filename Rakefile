@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 require "faker"
 require "set"
 
 task default: :json_data
 
-Faker::Config::locale = :ja
+Faker::Config.locale = :ja
 
 desc "generate json data"
 task :json_data do
-  File.open('resource/memo.json', 'w') do |file|
+  File.open("resource/memo.json", "w") do |file|
     json = []
     100.times do |i|
       json << {
@@ -19,4 +21,3 @@ task :json_data do
     JSON.dump(json, file)
   end
 end
-

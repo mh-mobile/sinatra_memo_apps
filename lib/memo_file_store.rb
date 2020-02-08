@@ -1,11 +1,12 @@
+# frozen_string_literal: true
+
 require "json"
 
 class MemoFileStore
-
   attr_reader :file_path
 
   def initialize(file_path)
-    @file_path = file_path 
+    @file_path = file_path
 
     unless File.exist?(@file_path)
       File.open(file_path, "w") do |file|
@@ -38,10 +39,10 @@ class MemoFileStore
   def update(memo_id, content)
     json = load(file_path)
     File.open(file_path, "w") do |file|
-      memo = json.find do |memo|
+      updated_memo = json.find do |memo|
         memo["memo_id"] == memo_id
       end
-      memo["content"] = content unless memo.nil?
+      updated_memo["content"] = content unless memo.nil?
       JSON.dump(json, file)
     end
   end
@@ -49,24 +50,22 @@ class MemoFileStore
   def create(content)
     json = load(file_path)
     File.open(file_path, "w") do |file|
-      memo_id = json.count + 1    
-      created_item = { 
+      memo_id = json.count + 1
+      created_item = {
         memo_id: memo_id,
         content: content
       }
- 
+
       json << created_item
       JSON.dump(json, file)
       created_item
     end
   end
 
-  private 
-
-  def load(file_path)
-    File.open(file_path, "r") do |file|
-      JSON.load(file)
+  private
+    def load(file_path)
+      File.open(file_path, "r") do |file|
+        JSON.load(file)
+      end
     end
-  end
-    
 end

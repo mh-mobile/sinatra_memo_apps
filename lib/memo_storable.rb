@@ -1,11 +1,12 @@
-module MemoStorable
+# frozen_string_literal: true
 
+module MemoStorable
   def store_strategy(store)
     @store = store
   end
 
   def findAll
-    @store.findAll 
+    @store.findAll
   end
 
   def find(memo_id)
@@ -23,5 +24,4 @@ module MemoStorable
   def create(content)
     @store.create(content)
   end
-
 end
