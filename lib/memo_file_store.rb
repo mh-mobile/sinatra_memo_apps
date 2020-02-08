@@ -50,11 +50,11 @@ class MemoFileStore
   def create(content)
     json = load(file_path)
     File.open(file_path, "w") do |file|
-      memo_id = Proc.new do 
+      memo_id = Proc.new do
         1 if json.empty?
         json.last["memo_id"] + 1
       end.call
-      
+
       created_item = {
         memo_id: memo_id,
         content: content
