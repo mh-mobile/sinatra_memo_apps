@@ -42,7 +42,7 @@ class MemoFileStore
       updated_memo = json.find do |memo|
         memo["memo_id"] == memo_id
       end
-      updated_memo["content"] = content unless memo.nil?
+      updated_memo["content"] = content unless updated_memo.nil?
       JSON.dump(json, file)
     end
   end
