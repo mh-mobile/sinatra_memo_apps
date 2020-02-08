@@ -50,6 +50,8 @@ class MemosController < Sinatra::Base
 
   # create
   post "/" do
+    redirect "/memos/new" if params["content"].empty?
+
     memo = Memo.create(params["content"])
     if memo.nil?
       redirect "/memos"
@@ -81,6 +83,7 @@ class MemosController < Sinatra::Base
 
   # update
   patch "/:id" do |memo_id|
+    redirect "/memos/#{memo_id}/edit" if params["content"].empty?
     Memo.update(memo_id.to_i, params["content"])
     redirect "/memos/#{memo_id}"
   end
