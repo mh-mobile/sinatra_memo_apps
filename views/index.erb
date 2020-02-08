@@ -2,7 +2,7 @@
 <% unless @memos.empty? %>
 <ul>
   <% @memos.each do |memo| %>
-  <li><a href='<%= "/memos/#{memo.memo_id}" %>'><%= "#{memo.content}" %></a></li>
+  <li><a href='<%= "/memos/#{memo.memo_id}" %>'><%= "#{trancate(first_line(memo.content))}" %></a></li>
   <% end %>
 </ul>
 <% else %>

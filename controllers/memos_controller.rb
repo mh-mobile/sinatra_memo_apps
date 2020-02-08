@@ -24,7 +24,16 @@ class MemosController < Sinatra::Base
     end
 
     def nl2br(text)
-      h(text).gsub(/\R/,"<br>")
+      h(text).gsub(/\R/, "<br>")
+    end
+
+    def first_line(text)
+      h(text).split(/\R/)[0]
+    end
+
+    def trancate(text, max=50) 
+      text = text[0, max] + "..." if text.length > max
+      text
     end
   end
 
