@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "faker"
-require "set"
 
 task default: :json_data
 
