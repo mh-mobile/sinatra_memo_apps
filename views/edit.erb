@@ -1,1 +1,10 @@
-edit dayo
+  <form method="post" action='/memos/<%= "#{@memo.memo_id}" %>'>
+    <div class="memo-textarea-container">
+      <textarea name="content"><%= "#{@memo.content}" %></textarea>
+    </div>
+
+    <div class="action-container">
+      <input type="hidden" name="_method" value="patch">
+      <input type="submit" value="update" class="edit-btn">
+    </div>
+  </form>

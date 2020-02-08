@@ -1,3 +1,12 @@
-<h1>Hello</h1>
 
-<%= DateTime.now.strftime('%D %X') %>
+<% unless @memos.empty? %>
+<ul>
+  <% @memos.each do |memo| %>
+  <li><a href='<%= "/memos/#{memo.memo_id}" %>'><%= "#{memo.content}" %></a></li>
+  <% end %>
+</ul>
+<% else %>
+  <div>
+    Memo Not Found.
+  </div>
+<% end %>

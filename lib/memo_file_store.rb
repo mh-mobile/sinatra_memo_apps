@@ -50,11 +50,14 @@ class MemoFileStore
     json = load(file_path)
     File.open(file_path, "w") do |file|
       memo_id = json.count + 1    
-      json << { 
+      created_item = { 
         memo_id: memo_id,
         content: content
       }
+ 
+      json << created_item
       JSON.dump(json, file)
+      created_item
     end
   end
 

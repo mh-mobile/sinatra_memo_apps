@@ -2,10 +2,13 @@
 <html>
     <head>
        <title>memo app</title>
+       <link href="/css/app.css" rel="stylesheet">
    </head>
     <body>
         <%= erb :header %>
-        <%= yield %>
+        <main>
+          <%= yield %>
+        </main>
         <%= erb :footer %>
     </body>
 </html>

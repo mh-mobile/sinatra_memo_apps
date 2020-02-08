@@ -1,4 +1,4 @@
-module MemoRecordable
+module MemoStorable
 
   def store_strategy(store)
     @store = store
