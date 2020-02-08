@@ -2,7 +2,7 @@
 <% unless @memos.empty? %>
 <ul>
   <% @memos.each do |memo| %>
-    <%= erb :list_item, :locals => { :memo => memo } %>
+    <%= erb :_list_item, :locals => { :memo => memo } %>
   <% end %>
 </ul>
 <% else %>
