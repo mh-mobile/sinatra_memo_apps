@@ -1,2 +1,2 @@
 
-<li class="list-item"><a href='<%= "/memos/#{locals[:memo].memo_id}" %>'><%= "#{truncate(first_line(locals[:memo].content), 100)}" %></a></li>
+<li class="list-item" onclick="showMemo('<%= "#{locals[:memo].memo_id}" %>');"><%= "#{truncate(first_line(locals[:memo].content), 100)}" %></li>
