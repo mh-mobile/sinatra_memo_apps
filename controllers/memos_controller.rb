@@ -18,6 +18,16 @@ class MemosController < Sinatra::Base
   set :root, File.join(File.dirname(__FILE__), "..")
   set :views, Proc.new { File.join(root, "views") }
 
+  helpers do 
+    def h(text)
+      Rack::Utils.escape_html(text)
+    end
+
+    def nl2br(text)
+      h(text).gsub(/\R/,"<br>")
+    end
+  end
+
   get "/" do 
     @memos = Memo.findAll
     @require_new_link = true
