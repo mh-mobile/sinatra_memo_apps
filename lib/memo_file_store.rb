@@ -64,7 +64,7 @@ class MemoFileStore
   private 
 
   def load(file_path)
-    File.open(file_path, "r") do | file|
+    File.open(file_path, "r") do |file|
       JSON.load(file)
     end
   end

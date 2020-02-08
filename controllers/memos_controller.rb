@@ -10,7 +10,6 @@ class Rack::MethodOverride
   end
 end
 
-
 class MemosController < Sinatra::Base
 
   enable :method_override
@@ -53,6 +52,7 @@ class MemosController < Sinatra::Base
     end
   end
 
+  # new
   get "/new" do
     erb :new
   end
@@ -60,7 +60,11 @@ class MemosController < Sinatra::Base
   # show 
   get "/:id" do |memo_id|
     @memo = Memo.find(memo_id.to_i)
-    erb :show
+    if @memo.nil?
+      erb :not_found
+    else
+      erb :show
+    end
   end
 
   # destroy
@@ -75,7 +79,6 @@ class MemosController < Sinatra::Base
     redirect "/memos/#{memo_id}"
   end
 
-  # new
   # edit
   get "/:id/edit" do |memo_id|
     @memo = Memo.find(memo_id.to_i)
