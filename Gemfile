@@ -9,6 +9,6 @@ gem "sinatra"
 gem "sinatra-contrib"
 
 group :development, :test do 
-  gem 'faker'
-  gem 'faker-japanese'
+  gem "faker"
+  gem "rubocop-faker"
 end
