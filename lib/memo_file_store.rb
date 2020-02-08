@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "json"
+require "time"
 
 class MemoFileStore
   attr_reader :file_path
@@ -42,7 +43,10 @@ class MemoFileStore
       updated_memo = json.find do |memo|
         memo["memo_id"] == memo_id
       end
-      updated_memo["content"] = content unless updated_memo.nil?
+      unless updated_memo.nil?
+        updated_memo["content"] = content
+        updated_memo["updated_at"] = Time.now.iso8601
+      end
       JSON.dump(json, file)
     end
   end
@@ -51,13 +55,15 @@ class MemoFileStore
     json = load(file_path)
     File.open(file_path, "w") do |file|
       memo_id = Proc.new do
-        1 if json.empty?
-        json.last["memo_id"] + 1
+        json.empty? ? 1 : json.last["memo_id"] + 1
       end.call
 
+      currentTime = Time.now.iso8601
       created_item = {
         memo_id: memo_id,
-        content: content
+        content: content,
+        created_at: currentTime,
+        updated_at: currentTime
       }
 
       json << created_item

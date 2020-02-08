@@ -1,2 +1,9 @@
 
-<li class="list-item" onclick="showMemo('<%= "#{memo.memo_id}" %>');"><%= "#{truncate(first_line(memo.content), 100)}" %></li>
+<li class="list-item" onclick="showMemo('<%= "#{memo.memo_id}" %>');">
+    <div class="list-item-updated">
+        <%= "#{memo.updated_at.strftime("%Y/%m/%d %H:%M:%S")} 更新" %>
+    </div>
+    <div>
+        <%= "#{truncate(first_line(memo.content), 100)}" %>
+    </div>
+</li>

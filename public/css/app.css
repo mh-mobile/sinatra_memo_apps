@@ -217,6 +217,11 @@ ul {
   cursor: pointer;
 }
 
+.list-item-updated {
+  color: #52565e;
+  font-size: 0.8em;
+}
+
 .memo-display-container {
   min-height: 50vh;
   height: auto;

@@ -31,6 +31,8 @@ class Memo
     Memo.new.tap do |memo|
       memo.memo_id = memo_item["memo_id"]
       memo.content = memo_item["content"]
+      memo.created_at = Time.parse(memo_item["created_at"])
+      memo.updated_at = Time.parse(memo_item["updated_at"])
     end
   end
 end

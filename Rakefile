@@ -13,7 +13,9 @@ task :json_data do
     100.times do |i|
       json << {
         "memo_id": i + 1,
-        "content": "#{Faker::Lorem.paragraph(sentence_count: 20)}"
+        "content": "#{Faker::Lorem.paragraph(sentence_count: 20)}",
+        "created_at": Time.now.iso8601,
+        "updated_at": Time.now.iso8601
       }
     end
 
