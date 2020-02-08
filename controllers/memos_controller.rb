@@ -36,7 +36,7 @@ class MemosController < Sinatra::Base
       h(text).split(/\R/)[0]
     end
 
-    def trancate(text, max = 50)
+    def truncate(text, max = 50)
       text = text[0, max] + "..." if text.length > max
       text
     end
