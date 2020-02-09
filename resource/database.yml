@@ -1,0 +1,8 @@
+  db:
+    host: localhost
+    user: <%= ENV["PG_DB_USER"] %>
+    password: <%= ENV["PG_DB_PASSWORD"] %>
+    dbname: memos
+    port: 5432
+    
+    
