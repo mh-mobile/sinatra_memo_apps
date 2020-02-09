@@ -76,8 +76,4 @@ class MemoDbStore
     }
   end
 
-  def connection
-    p "db:cofig: #{db_config}"
-    @connection ||= PG.connect(db_config)
-  end
 end
