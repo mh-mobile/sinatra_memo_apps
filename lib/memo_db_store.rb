@@ -6,8 +6,8 @@ require "erb"
 require "dotenv"
 
 class MemoDbStore
-  attr_accessor :connection
-  attr_accessor :db_config
+  attr_reader :connection
+  attr_reader :db_config
 
   def initialize(db_config_path)
     Dotenv.load
