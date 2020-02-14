@@ -11,21 +11,21 @@ class MemoFileStore
     @file_path = file_path
 
     unless File.exist?(@file_path)
-      MemoFileLock.synchronized(@file_path, "w") do |w_file|
-        JSON.dump([], w_file)
+      MemoFileLock.synchronized(@file_path, "w") do |file|
+        JSON.dump([], file)
       end
     end
   end
 
   def findAll
-    MemoFileLock.synchronized(@file_path, "r") do |r_file|
-      load_json(r_file)
+    MemoFileLock.synchronized(@file_path, "r") do |file|
+      load_json(file)
     end
   end
 
   def find(memo_id)
-    MemoFileLock.synchronized(file_path, "r") do |r_file|
-      json = load_json(r_file)
+    MemoFileLock.synchronized(file_path, "r") do |file|
+      json = load_json(file)
       json.find do |memo|
         memo["memo_id"] == memo_id
       end
@@ -33,21 +33,21 @@ class MemoFileStore
   end
 
   def delete(memo_id)
-    MemoFileLock.synchronized(file_path, "r") do |r_file|
-      json = load_json(r_file)
-      File.open(file_path, "w") do |w_file|
+    MemoFileLock.synchronized(file_path, "r+") do |file|
+      json = load_json(file)
+      prepare_to_write(file) do
         updated_json = json.reject do |memo|
           memo["memo_id"] == memo_id
         end
-        JSON.dump(updated_json, w_file)
+        JSON.dump(updated_json, file)
       end
     end
   end
 
   def update(memo_id, content)
-    MemoFileLock.synchronized(file_path, "r") do |r_file|
-      json = load_json(r_file)
-      File.open(file_path, "w") do |w_file|
+    MemoFileLock.synchronized(file_path, "r+") do |file|
+      json = load_json(file)
+      prepare_to_write(file) do
         updated_memo = json.find do |memo|
           memo["memo_id"] == memo_id
         end
@@ -55,15 +55,15 @@ class MemoFileStore
           updated_memo["content"] = content
           updated_memo["updated_at"] = Time.now.iso8601
         end
-        JSON.dump(json, w_file)
+        JSON.dump(json, file)
       end
     end
   end
 
   def create(content)
-    MemoFileLock.synchronized(file_path, "r") do |r_file|
-      json = load_json(r_file)
-      File.open(file_path, "w") do |w_file|
+    MemoFileLock.synchronized(file_path, "r+") do |file|
+      json = load_json(file)
+      prepare_to_write(file) do
         memo_id = Proc.new do
           json.empty? ? 1 : json.last["memo_id"] + 1
         end.call
@@ -77,14 +77,22 @@ class MemoFileStore
         }
 
         json << created_item
-        JSON.dump(json, w_file)
+        JSON.dump(json, file)
         created_item
       end
     end
   end
 
   private
-    def load_json(r_file)
-      JSON.load(r_file)
+    def load_json(file)
+      JSON.load(file)
+    end
+
+    def prepare_to_write(file)
+      file.rewind
+      yield(file)
+    ensure
+      file.flush
+      file.truncate(file.pos)
     end
 end
