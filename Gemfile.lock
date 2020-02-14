@@ -50,6 +50,7 @@ PLATFORMS
 
 DEPENDENCIES
   faker
+  parallel
   rubocop-faker
   sinatra
   sinatra-contrib
