@@ -13,6 +13,14 @@ class AppController < Sinatra::Base
   set :views, Proc.new { File.join(root, "views") }
   set :show_exceptions, false
 
+  def logger 
+    @logger ||= begin
+      file = File.new("#{settings.root}/log/#{settings.environment}.log", "a+")
+      file.sync = true
+      Logger.new(file)
+    end
+  end
+
   helpers do
     def h(text)
       Rack::Utils.escape_html(text)
@@ -37,6 +45,7 @@ class AppController < Sinatra::Base
   end
 
   error 500 do
+    logger.error(env["sinatra.error"].message)
     erb :system_error
   end
 end
