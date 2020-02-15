@@ -2,37 +2,10 @@
 
 require "sinatra/base"
 require "sinatra/reloader"
+require_relative "app_controller.rb"
 require_relative "../models/memo.rb"
 
-class MemosController < Sinatra::Base
-  configure :development do
-    register Sinatra::Reloader
-  end
-
-  enable :method_override
-
-  set :root, File.join(File.dirname(__FILE__), "..")
-  set :views, Proc.new { File.join(root, "views") }
-
-  helpers do
-    def h(text)
-      Rack::Utils.escape_html(text)
-    end
-
-    def nl2br(text)
-      h(text).gsub(/\R/, "<br>")
-    end
-
-    def first_line(text)
-      h(text).split(/\R/)[0]
-    end
-
-    def truncate(text, max = 50)
-      text = text[0, max] + "..." if text.length > max
-      text
-    end
-  end
-
+class MemosController < AppController
   get "/" do
     @memos = Memo.findAll
     @require_new_link = true
@@ -83,9 +56,5 @@ class MemosController < Sinatra::Base
   get "/:id/edit" do |memo_id|
     @memo = Memo.find(memo_id.to_i)
     erb :edit
-  end
-
-  not_found do
-    erb :not_found
   end
 end
