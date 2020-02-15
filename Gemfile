@@ -13,4 +13,5 @@ gem "dotenv"
 group :development, :test do
   gem "faker"
   gem "rubocop-faker"
+  gem "parallel"
 end

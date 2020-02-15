@@ -4,15 +4,6 @@ require "sinatra/base"
 require "sinatra/reloader"
 require_relative "../models/memo.rb"
 
-class Rack::MethodOverride
-  ALLOWED_METHOD = %w[POST]
-  def method_override(env)
-    req = Rack::Request.new(env)
-    method = req.params[METHOD_OVERRIDE_PARAM_KEY] || env[HTTP_METHOD_OVERRIDE_HEADER]
-    method.to_s.upcase
-  end
-end
-
 class MemosController < Sinatra::Base
   configure :development do
     register Sinatra::Reloader

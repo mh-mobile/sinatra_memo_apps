@@ -54,6 +54,7 @@ DEPENDENCIES
   dotenv
   faker
   pg
+  parallel
   rubocop-faker
   sinatra
   sinatra-contrib
