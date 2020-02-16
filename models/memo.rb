@@ -23,8 +23,7 @@ class Memo
   end
 
   def self.create(content)
-    item = MemoDao.create(content)
-    convert(item) unless item.nil?
+    MemoDao.create(content)
   end
 
   def self.convert(memo_item)

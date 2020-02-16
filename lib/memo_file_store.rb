@@ -78,7 +78,7 @@ class MemoFileStore
 
         json << created_item
         JSON.dump(json, file)
-        created_item
+        memo_id
       end
     end
   end

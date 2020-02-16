@@ -43,11 +43,11 @@ class MemosController < Sinatra::Base
   post "/" do
     redirect "/memos/new" if params["content"].empty?
 
-    memo = Memo.create(params["content"])
-    if memo.nil?
+    memo_id = Memo.create(params["content"])
+    if memo_id.nil?
       redirect "/memos"
     else
-      redirect "/memos/#{memo.memo_id}"
+      redirect "/memos/#{memo_id}"
     end
   end
 
