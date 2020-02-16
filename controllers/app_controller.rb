@@ -3,19 +3,26 @@
 require "sinatra/base"
 
 class AppController < Sinatra::Base
-  configure :development do
-    register Sinatra::Reloader
-  end
-
   enable :method_override
 
   set :root, File.join(File.dirname(__FILE__), "..")
   set :views, Proc.new { File.join(root, "views") }
   set :show_exceptions, false
 
+  configure :development do
+    register Sinatra::Reloader
+  end
+
+  configure :development, :production do
+    enable :logging
+    file = File.new("#{settings.root}/log/common_#{settings.environment}.log", "a+")
+    file.sync = true
+    use Rack::CommonLogger, file
+  end
+
   def logger 
     @logger ||= begin
-      file = File.new("#{settings.root}/log/#{settings.environment}.log", "a+")
+      file = File.new("#{settings.root}/log/app_#{settings.environment}.log", "a+")
       file.sync = true
       Logger.new(file)
     end
