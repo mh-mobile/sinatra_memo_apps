@@ -5,14 +5,8 @@ require "pg"
 module PGManager
   def self.open(config)
     connection = PG.connect(config)
-    if block_given?
-      yield(connection)
-    else
-      connection
-    end
+    yield(connection)
   ensure
-    if block_given?
-      connection.close if connection
-    end
+    connection.close if connection
   end
 end
