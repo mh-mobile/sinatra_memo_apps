@@ -18,7 +18,7 @@ class MemoFileStoreTest < Minitest::Test
 
   def test_memo_insertion_by_multithread
     # メモの保存数が0であること
-    memos = @memo_file_store.findAll
+    memos = @memo_file_store.find_all
     assert_equal 0, memos.count
 
     # 10スレッドを生成して、メモを500件追加
@@ -27,7 +27,7 @@ class MemoFileStoreTest < Minitest::Test
     end
 
     # メモの保存数が500であること
-    memos = @memo_file_store.findAll
+    memos = @memo_file_store.find_all
     assert_equal 500, memos.count
 
     # 最後に追加されたメモのIDが500であること
