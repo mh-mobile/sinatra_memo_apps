@@ -15,7 +15,7 @@ class MemoFileStoreTest < Minitest::Test
     end
 
     def test_memo_insertion_by_multithread
-        # メモの保存数が0であることい
+        # メモの保存数が0であること
         memos = @memo_file_store.findAll
         assert_equal 0, memos.count
 
