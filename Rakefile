@@ -24,10 +24,3 @@ task :json_data do
     JSON.dump(json, file)
   end
 end
-
-task :add_memos, :count do |task, args|
-  count = args[:count].to_i
-  Parallel.each(1..count, in_threads: 10) do
-    Memo.create("#{Faker::Lorem.paragraph(sentence_count: 20)}")
-  end
-end
