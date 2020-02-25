@@ -5,8 +5,8 @@ require_relative "memo_dao.rb"
 class Memo
   attr_accessor :memo_id, :content, :created_at, :updated_at
 
-  def self.findAll
-    MemoDao.findAll.map(&method(:convert))
+  def self.find_all
+    MemoDao.find_all.map(&method(:convert))
   end
 
   def self.find(memo_id)

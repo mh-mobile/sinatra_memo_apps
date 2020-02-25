@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class MemoDbStore
-  def findAll
+  def find_all
   end
 
   def find(memo_id)
