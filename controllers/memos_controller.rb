@@ -7,7 +7,7 @@ require_relative "../models/memo.rb"
 
 class MemosController < AppController
   get "/" do
-    @memos = Memo.findAll
+    @memos = Memo.find_all
     @require_new_link = true
     erb :index
   end

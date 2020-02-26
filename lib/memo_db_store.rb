@@ -14,7 +14,7 @@ class MemoDbStore
     @db_config = YAML.load(ERB.new(File.read(db_config_path)).result)["db"]
   end
 
-  def findAll
+  def find_all
     PGManager.open(db_config) do |connection|
       results = connection.exec("select * from memos")
       results.map(&method(:convert))

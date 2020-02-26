@@ -5,8 +5,8 @@ module MemoStorable
     @store = store
   end
 
-  def findAll
-    @store.findAll
+  def find_all
+    @store.find_all
   end
 
   def find(memo_id)

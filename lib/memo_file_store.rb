@@ -17,7 +17,7 @@ class MemoFileStore
     end
   end
 
-  def findAll
+  def find_all
     MemoFileLock.synchronized(@file_path, "r") do |file|
       load_json(file)
     end
@@ -68,12 +68,12 @@ class MemoFileStore
           json.empty? ? 1 : json.last["memo_id"] + 1
         end.call
 
-        currentTime = Time.now.iso8601
+        current_time = Time.now.iso8601
         created_item = {
           "memo_id" => memo_id,
           "content" => content,
-          "created_at" => currentTime,
-          "updated_at" => currentTime,
+          "created_at" => current_time,
+          "updated_at" => current_time,
         }
 
         json << created_item
